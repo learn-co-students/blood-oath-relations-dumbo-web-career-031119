@@ -13,6 +13,12 @@ class Cult
         @@all << self
     end
 
+    def followers
+      Follower.all.select do |recruit|
+        recruit.name
+      end
+
+    end
     def recruit_follower(follower)
         # new_follower = Follower.new(name, age, life_motto, self)
     end
@@ -32,7 +38,7 @@ class Cult
     def self.find_by_founding_year(year)
       self.all.select do |founding|
         founding.founding_year == year
-      end 
+      end
     end
 
     def self.all
