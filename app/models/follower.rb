@@ -12,8 +12,9 @@ class Follower
         @@all << self
     end
 
+
     def self.all
-        @@all
+      @@all
     end
 
-end 
+end
