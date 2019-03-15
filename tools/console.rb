@@ -8,7 +8,7 @@ end
 # so they will be available to test and play around with in your console
 
 cult1 = Cult.new("Digi Cult", "Digital Underground", 1999, "All humans must die")
-cult2 = Cult.new("Mole Women", "Ohio", 2015, "I know Karate")
+cult2 = Cult.new("Mole Women", "Scranton", 2005, "I know Karate")
 cult3 = Cult.new("Dunder Mifflin", "Scranton", 2005, "That's what she said")
 
 follower1 = Follower.new("Michael", 43, "That's what she said", cult3)
