@@ -19,11 +19,31 @@ class Follower
     end
 
     def join_cult(cult)
-        Bloodoath.new(self, cult)
+        if age > cult.minimum_age
+            Bloodoath.new(self, cult)
+        else
+            puts "Sorry, maybe try Club Penguin?"
+        end
     end
 
     def self.of_a_certain_age(age)
         self.all.select {|member| member.age == age}
+    end
+
+    def my_cults_slogans
+        cults.each {|cult| puts cult.slogan}
+    end
+
+    def self.most_active
+        (Follower.all.sort_by{|follower| follower.cults.length}).first
+    end
+
+    def self.top_ten
+        (Follower.all.sort_by{|follower| follower.cults.length}).slice(0..9)
+    end
+
+    def fellow_cult_members
+        (cults.collect {|cult| cult.followers_list.each {|follower| follower}}).uniq()
     end
 
     def self.all

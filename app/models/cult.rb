@@ -4,20 +4,25 @@ class Cult
     @@locations = []
 
     attr_accessor :name, :location, :slogan, :cult_population
-    attr_reader :founding_year, :average_age, :most_common_location
+    attr_reader :founding_year, :average_age, :most_common_location, :minimum_age
 
-    def initialize(name, location, founding_year, slogan)
+    def initialize(name, location, founding_year, slogan, minimum_age = 18)
         @name = name
         @location = location
         @founding_year = founding_year
         @average_age = 0
         @slogan = slogan
         @followers_list = []
+        @minimum_age = minimum_age
         @@all << self
     end
 
     def recruit_follower(follower)
-        Bloodoath.new(follower, self)
+        if follower.age >= minimum_age
+            Bloodoath.new(follower, self)
+        else
+            puts "Sorry, maybe try Club Penguin?"
+        end
     end
 
     def cult_population
@@ -64,13 +69,10 @@ class Cult
         @@locations = (Cult.all.collect {|x| x.location}).uniq()
     end
 
-    # def self.most_common_location
-    #     count = []
-    #     @@locations.each {|location|
-    #             count.push(Cult.count {|cult| cult.location == location})
-    #     }
-    #     self.locations[count.index_of(count.max)]
-    # end
+    def self.most_common_location
+        city_arr =  Cult.all.collect {|cult|cult.location}
+        city_arr.max_by{|city| city_arr.count(city)}
+    end
     
     def self.all
         @@all
